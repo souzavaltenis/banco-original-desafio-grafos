@@ -10,20 +10,12 @@ import com.souzavaltenis.originaldesafio.dto.ArestaDTO;
 import com.souzavaltenis.originaldesafio.model.Aresta;
 import com.souzavaltenis.originaldesafio.model.Grafo;
 import com.souzavaltenis.originaldesafio.model.Vertice;
-import com.souzavaltenis.originaldesafio.repository.ArestaRepository;
 
 @Service
 public class ArestaService {
-	
-    @Autowired
-    private ArestaRepository repository;
     
     @Autowired
     private VerticeService verticeService;
-    
-    public Aresta insert(Aresta aresta) {
-    	return repository.save(aresta);
-    }
     
     /*
      * Cria lista de Arestas DTO por meio de um modelo grafo.
@@ -89,7 +81,6 @@ public class ArestaService {
 		inicio.getArestasSaida().add(aresta);
 		fim.getArestasEntrada().add(aresta);
 		grafo.getArestas().add(aresta);
-		this.insert(aresta);
 	}
     
 }

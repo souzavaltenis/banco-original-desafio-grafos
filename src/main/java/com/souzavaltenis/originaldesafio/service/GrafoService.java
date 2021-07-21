@@ -23,5 +23,5 @@ public class GrafoService {
     public Grafo insert(Grafo grafo) {
     	return repository.save(grafo);
     }
-	
+ 
 }

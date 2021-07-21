@@ -2,22 +2,13 @@ package com.souzavaltenis.originaldesafio.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.souzavaltenis.originaldesafio.dto.ArestaDTO;
 import com.souzavaltenis.originaldesafio.model.Vertice;
-import com.souzavaltenis.originaldesafio.repository.VerticeRepository;
 
 @Service
 public class VerticeService {
-	
-    @Autowired
-    private VerticeRepository repository;
-    
-    public Vertice insert(Vertice vertice) {
-    	return repository.save(vertice);
-    }
     
     /*
      * Adiciona vertices em um grafo por meio de uma lista de Arestas DTO.
@@ -33,11 +24,9 @@ public class VerticeService {
     		
     		if(!containsVertice(vertices, inicio)) {
     			vertices.add(inicio);
-    			this.insert(inicio);
     		}
     		if(!containsVertice(vertices, fim)) {
     			vertices.add(fim);
-    			this.insert(fim);
     		}
     	}
     }
