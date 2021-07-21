@@ -1,4 +1,4 @@
-package com.souzavaltenis.originaldesafio.modelo;
+package com.souzavaltenis.originaldesafio.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +27,12 @@ public class Aresta {
 
 	public Aresta(Integer id, Vertice inicio, Vertice fim, Integer distancia) {
 		this.id = id;
+		this.inicio = inicio;
+		this.fim = fim;
+		this.distancia = distancia;
+	}
+	
+	public Aresta(Vertice inicio, Vertice fim, Integer distancia) {
 		this.inicio = inicio;
 		this.fim = fim;
 		this.distancia = distancia;
@@ -64,4 +70,9 @@ public class Aresta {
 		this.distancia = distancia;
 	}
 
+	@Override
+	public String toString() {
+		return "Aresta [id=" + id + ", inicio=" + inicio.getDado() + ", fim=" + fim.getDado() + ", distancia=" + distancia + "]";
+	}
+	
 }

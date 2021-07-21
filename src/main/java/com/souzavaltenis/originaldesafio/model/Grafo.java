@@ -1,4 +1,4 @@
-package com.souzavaltenis.originaldesafio.modelo;
+package com.souzavaltenis.originaldesafio.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,14 @@ public class Grafo {
 	public Grafo() {
 		this.vertices = new ArrayList<>();
 		this.arestas = new ArrayList<>();
+	}	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public List<Vertice> getVertices() {

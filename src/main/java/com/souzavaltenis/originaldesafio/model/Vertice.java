@@ -1,4 +1,4 @@
-package com.souzavaltenis.originaldesafio.modelo;
+package com.souzavaltenis.originaldesafio.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +30,11 @@ public class Vertice {
 
 	public Vertice() {
 
+	}
+
+	public Vertice(String dado) {
+		super();
+		this.dado = dado;
 	}
 
 	public Integer getId() {
