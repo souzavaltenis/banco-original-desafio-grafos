@@ -1,21 +1,18 @@
-package com.souzavaltenis.originaldesafio.service;
+package com.souzavaltenis.originaldesafio.util;
 
 import java.util.List;
-
-import org.springframework.stereotype.Service;
 
 import com.souzavaltenis.originaldesafio.dto.ArestaDTO;
 import com.souzavaltenis.originaldesafio.model.Vertice;
 
-@Service
-public class VerticeService {
-    
+public class VerticeUtil {
+	
     /*
      * Adiciona vertices em um grafo por meio de uma lista de Arestas DTO.
      * Percorre todas arestas procurando por um vértice ainda não existente no grafo,
      * utilizando o vértice inicio e fim presente em uma aresta.
      * */
-    public void adicionarVertices(List<Vertice> vertices, List<ArestaDTO> arestas) {
+    public static void adicionarVertices(List<Vertice> vertices, List<ArestaDTO> arestas) {
     	
     	for(ArestaDTO a : arestas) {
     		
@@ -35,7 +32,7 @@ public class VerticeService {
      * Recebe uma lista de vertice e realiza uma busca por um vertice específico,
      * sendo essa pesquisa feita por meio do campo dado e não o objeto inteiro.
      * */
-    public boolean containsVertice(List<Vertice> vertices, Vertice vertice) {
+    public static boolean containsVertice(List<Vertice> vertices, Vertice vertice) {
     	return vertices.stream().anyMatch(x -> x.getDado().equals(vertice.getDado()));
     }
 
@@ -43,7 +40,7 @@ public class VerticeService {
      * Realiza uma busca de vértice na lista de vertice de um grafo utilizando o campo dado
      * presente no objeto Vertice retornando um objeto quando encontrar.
      * */
-	public Vertice findVertice(List<Vertice> vertices, String dado){
+	public static Vertice findVertice(List<Vertice> vertices, String dado){
 
 		Vertice vertice = null;
 		
@@ -56,4 +53,5 @@ public class VerticeService {
 
 		return vertice;
 	}
+	
 }

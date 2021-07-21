@@ -1,26 +1,19 @@
-package com.souzavaltenis.originaldesafio.service;
+package com.souzavaltenis.originaldesafio.util;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.souzavaltenis.originaldesafio.dto.ArestaDTO;
 import com.souzavaltenis.originaldesafio.model.Aresta;
 import com.souzavaltenis.originaldesafio.model.Grafo;
 import com.souzavaltenis.originaldesafio.model.Vertice;
 
-@Service
-public class ArestaService {
-    
-    @Autowired
-    private VerticeService verticeService;
-    
+public class ArestaUtil {
+
     /*
      * Cria lista de Arestas DTO por meio de um modelo grafo.
      * */
-    public List<ArestaDTO> criarArestasDTO(Grafo grafo) {
+    public static List<ArestaDTO> criarArestasDTO(Grafo grafo) {
     	
     	List<ArestaDTO> arestas = new ArrayList<>();
 
@@ -39,7 +32,7 @@ public class ArestaService {
      * Adiciona arestas que ainda não existem em um grafo 
      * por meio de uma lista de Arestas DTO.
      * */
-    public void adicionarArestas(Grafo grafo, List<ArestaDTO> arestas) {
+    public static void adicionarArestas(Grafo grafo, List<ArestaDTO> arestas) {
     	for(ArestaDTO a : arestas) {
     		if(!contemAresta(grafo.getArestas(), a)) {
     			adicionarAresta(grafo, a.getSource(), a.getTarget(), a.getDistance());
@@ -51,7 +44,7 @@ public class ArestaService {
      * Verifica se uma arestaDTO pode ser adicionada as arestas de um grafo
      * com a condição de não possuir inicio, fim e distância iguais.
      * */
-    public boolean contemAresta(List<Aresta> arestas, ArestaDTO arestaDTO) {
+    public static boolean contemAresta(List<Aresta> arestas, ArestaDTO arestaDTO) {
     	
     	for(Aresta a : arestas) {
     		
@@ -74,13 +67,12 @@ public class ArestaService {
     /*
      * Prepara e Adiciona uma aresta em um grafo.
      * */
-	public void adicionarAresta(Grafo grafo, String dadoInicio, String dadoFim, Integer distancia) {
-		Vertice inicio = verticeService.findVertice(grafo.getVertices(), dadoInicio);
-		Vertice fim = verticeService.findVertice(grafo.getVertices(), dadoFim);
+	public static void adicionarAresta(Grafo grafo, String dadoInicio, String dadoFim, Integer distancia) {
+		Vertice inicio = VerticeUtil.findVertice(grafo.getVertices(), dadoInicio);
+		Vertice fim = VerticeUtil.findVertice(grafo.getVertices(), dadoFim);
 		Aresta aresta = new Aresta(inicio, fim, distancia);
 		inicio.getArestasSaida().add(aresta);
 		fim.getArestasEntrada().add(aresta);
 		grafo.getArestas().add(aresta);
 	}
-    
 }

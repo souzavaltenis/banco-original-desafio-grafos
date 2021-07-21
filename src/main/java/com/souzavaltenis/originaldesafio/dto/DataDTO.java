@@ -7,7 +7,7 @@ public class DataDTO {
 	private List<ArestaDTO> data;
 
 	public DataDTO() {
-		
+
 	}
 
 	public DataDTO(List<ArestaDTO> data) {

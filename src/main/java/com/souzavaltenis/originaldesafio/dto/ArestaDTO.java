@@ -2,12 +2,12 @@ package com.souzavaltenis.originaldesafio.dto;
 
 public class ArestaDTO {
 
-    private String source;
-    private String target;
-    private Integer distance;
-    
+	private String source;
+	private String target;
+	private Integer distance;
+
 	public ArestaDTO() {
-		
+
 	}
 
 	public ArestaDTO(String source, String target, Integer distance) {
@@ -38,11 +38,6 @@ public class ArestaDTO {
 
 	public void setDistance(Integer distance) {
 		this.distance = distance;
-	}
-
-	@Override
-	public String toString() {
-		return "ArestaDTO [source=" + source + ", target=" + target + ", distance=" + distance + "]";
 	}
 
 }

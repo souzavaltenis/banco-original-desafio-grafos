@@ -3,14 +3,14 @@ package com.souzavaltenis.originaldesafio.dto;
 import java.util.List;
 
 public class GrafoDTO {
-	
+
 	private Integer id;
 	private List<ArestaDTO> data;
 
 	public GrafoDTO() {
-		
+
 	}
-	
+
 	public GrafoDTO(Integer id, List<ArestaDTO> data) {
 		this.id = id;
 		this.data = data;
@@ -31,5 +31,5 @@ public class GrafoDTO {
 	public void setData(List<ArestaDTO> data) {
 		this.data = data;
 	}
-	
+
 }

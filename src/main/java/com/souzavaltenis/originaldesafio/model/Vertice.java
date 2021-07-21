@@ -69,4 +69,9 @@ public class Vertice {
 		this.arestasSaida = arestasSaida;
 	}
 
+	@Override
+	public String toString() {
+		return dado;
+	}
+
 }
