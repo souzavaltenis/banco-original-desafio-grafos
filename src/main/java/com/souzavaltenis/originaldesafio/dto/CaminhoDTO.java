@@ -1,5 +1,9 @@
 package com.souzavaltenis.originaldesafio.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_NULL)
 public class CaminhoDTO {
 
 	private String route;
@@ -10,7 +14,6 @@ public class CaminhoDTO {
 	}
 
 	public CaminhoDTO(String route, Integer stops) {
-		super();
 		this.route = route;
 		this.stops = stops;
 	}

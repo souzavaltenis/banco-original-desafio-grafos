@@ -12,6 +12,15 @@ import com.souzavaltenis.originaldesafio.model.Vertice;
 
 public class CaminhoUtil {
 	
+	/*
+	 * Criação de um objeto RoutesDTO com todos os caminhos possíveis sendo possível a filtragem
+	 * por paradas máximas.
+	 * */
+	public static RoutesDTO criarRoutesDTO(Grafo grafo, String o, String d, Integer paradasMaximas) {
+		List<LinkedList<Vertice>> caminhos = CaminhoUtil.obterCaminhos(grafo, o, d, paradasMaximas);
+		RoutesDTO routesDTO = CaminhoUtil.caminhosParaDTO(caminhos);
+		return routesDTO;
+	}
 	
 	/*
 	 * Converte caminhos para uma Lista de CaminhoDTO e cria um objeto RoutesDTO
@@ -34,7 +43,7 @@ public class CaminhoUtil {
 		
 		for(LinkedList<Vertice> c : caminhos) {
 			String route = concatenarCaminhos(c);
-			Integer stops = c.size() - 1; //-1 pois não conta a origem de acordo com o exemplos dados
+			Integer stops = c.size() - 1; //-1 pois não conta a origem de acordo com os exemplos
 			CaminhoDTO caminhoDTO = new CaminhoDTO(route, stops);
 			caminhosDTO.add(caminhoDTO);
 		}
@@ -73,7 +82,7 @@ public class CaminhoUtil {
         CaminhoUtil.buscaEmProfundidade(caminhos, visitados, destino);
         
         if(paradasMaximas != null) { //Caso existir limite de paradas, realiza a filtragem
-        	caminhos.removeIf(c -> c.size() > paradasMaximas + 1); //+1 pois conta com a origem de acordo com o exemplos dados
+        	caminhos.removeIf(c -> c.size() > paradasMaximas + 1); //+1 pois conta com a origem de acordo com os exemplos
         }
         
         return caminhos;
