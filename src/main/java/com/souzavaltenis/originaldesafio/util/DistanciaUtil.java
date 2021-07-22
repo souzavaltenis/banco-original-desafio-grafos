@@ -34,13 +34,9 @@ public class DistanciaUtil {
     	if(path.isEmpty() || path.size() == 1) { //Lista de bairros vazia ou possua apenas 1 bairro
     		return 0;
     	}
-    	
-    	String o = path.get(0);
-    	String d = path.get(path.size()-1);
-    	
-    	List<LinkedList<Vertice>> caminhos = CaminhoUtil.obterCaminhos(grafo, o, d, null);
-    	LinkedList<Vertice> caminhoPesquisado = encontrarCaminho(caminhos, path);
-    	
+
+    	LinkedList<Vertice> caminhoPesquisado = criarListaCaminho(grafo, path);
+
     	if(caminhoPesquisado == null) { //caminho não encontrado dentre os possíveis caminhos
     		return -1;
     	}
@@ -49,26 +45,35 @@ public class DistanciaUtil {
     	
     	return distanciaTotal;
     }
-	
+    
     /*
-     * Procura um caminho específico dentre todos os caminhos existentes entre dois vértices.
+     * A partir de uma lista de string que representam os vértices, é realizado uma
+     * busca no grafo para construir um caminho. No caso de não existir, retorna null.
      * */
-    public static LinkedList<Vertice> encontrarCaminho(List<LinkedList<Vertice>> caminhos, List<String> path){
+    public static LinkedList<Vertice> criarListaCaminho(Grafo grafo, List<String> path){
     	
-    	for(LinkedList<Vertice> caminho : caminhos) {
-    		boolean achou = true;
-    		for(int i=0; i<caminho.size(); i++) {
-    			if(!caminho.get(i).getDado().equals(path.get(i))) {
-    				achou = false;
-    				break;
-    			}
-    		}
-    		if(achou) {
-    			return caminho;
-    		}
+    	LinkedList<Vertice> caminho = new LinkedList<>();
+    	Vertice origem = VerticeUtil.findVertice(grafo.getVertices(), path.get(0));
+    	caminho.add(origem); //Inicia o caminho com a origem
+    	path.remove(0); //Remove o primeiro pois já foi adicionado anteriormente
+    	
+    	for(String p : path) {
+    		
+    		Vertice ultimo = caminho.getLast();
+    		Vertice proximo = VerticeUtil.findVertice(grafo.getVertices(), p);
+			LinkedList<Vertice> verticesFinais = CaminhoUtil.proximosVertices(ultimo.getArestasSaida());
+
+			//Verifica se os vértices finais das arestas do ultimo vértice 
+			//não contém o próximo vértice a ser adicionado.
+			//Em caso afirmativo, ele será um caminho inválido.
+			if(!verticesFinais.contains(proximo)) { 
+				return null;
+			}
+			
+			caminho.add(proximo);
     	}
-    	
-    	return null;
+
+    	return caminho;
     }
     
     /*

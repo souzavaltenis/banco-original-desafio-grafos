@@ -64,8 +64,7 @@ public class DistanciaController {
 	}
     
     @PostMapping(value = "/from/{town1}/to/{town2}")
-    public ResponseEntity<DistanciaDTO> calcularDistanciaMinima(@PathVariable String town1, @PathVariable String town2, 
-    		@RequestBody GrafoDTO grafoDTO){
+    public ResponseEntity<DistanciaDTO> calcularDistanciaMinima(@PathVariable String town1, @PathVariable String town2, @RequestBody GrafoDTO grafoDTO){
     	
     	Grafo grafo = GrafoUtil.grafoDTOParaGrafo(grafoDTO);
     	

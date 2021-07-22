@@ -120,7 +120,7 @@ public class CaminhoUtil {
     /*
      * Extrai uma lista dos próximos vértices a partir de uma lista de arestas de saida coletada de um vértice.
      * */
-    private static LinkedList<Vertice> proximosVertices(List<Aresta> arestasSaida){
+    public static LinkedList<Vertice> proximosVertices(List<Aresta> arestasSaida){
 		
 		LinkedList<Vertice> vertices = new LinkedList<>();
 		
