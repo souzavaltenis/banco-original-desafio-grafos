@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.souzavaltenis.originaldesafio.service.CaminhoService;
 import com.souzavaltenis.originaldesafio.service.GrafoService;
 import com.souzavaltenis.originaldesafio.service.exception.ResourceNotFoundException;
-import com.souzavaltenis.originaldesafio.dto.DataDTO;
+import com.souzavaltenis.originaldesafio.dto.GrafoDTO;
 import com.souzavaltenis.originaldesafio.dto.RoutesDTO;
 import com.souzavaltenis.originaldesafio.model.Grafo;
 import com.souzavaltenis.originaldesafio.util.GrafoUtil;
@@ -30,10 +30,10 @@ public class CaminhoController {
     
 
     @PostMapping(value = "/from/{town1}/to/{town2}")
-    public ResponseEntity<RoutesDTO> encontrarCaminhos(@RequestBody DataDTO data, @PathVariable String town1, @PathVariable String town2, 
+    public ResponseEntity<RoutesDTO> encontrarCaminhos(@RequestBody GrafoDTO grafoDTO, @PathVariable String town1, @PathVariable String town2, 
     		@RequestParam(value = "maxStops", required=false) Integer maxStops){
 
-    	Grafo grafo = GrafoUtil.dataDTOParaGrafo(data);
+    	Grafo grafo = GrafoUtil.grafoDTOParaGrafo(grafoDTO);
     	
     	RoutesDTO routesDTO = caminhoService.criarRoutesDTO(grafo, town1, town2, maxStops);
     	

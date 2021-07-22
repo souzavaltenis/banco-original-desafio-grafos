@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.souzavaltenis.originaldesafio.service.GrafoService;
 import com.souzavaltenis.originaldesafio.service.exception.ResourceNotFoundException;
 import com.souzavaltenis.originaldesafio.util.GrafoUtil;
-import com.souzavaltenis.originaldesafio.dto.DataDTO;
 import com.souzavaltenis.originaldesafio.dto.GrafoDTO;
 import com.souzavaltenis.originaldesafio.model.Grafo;
 
@@ -25,12 +24,12 @@ public class GrafoController {
     private GrafoService grafoService;
 
     @PostMapping
-    public ResponseEntity<GrafoDTO> inserir(@RequestBody DataDTO data) {
+    public ResponseEntity<GrafoDTO> inserir(@RequestBody GrafoDTO data) {
     	
-    	Grafo grafo = GrafoUtil.dataDTOParaGrafo(data);
+    	Grafo grafo = GrafoUtil.grafoDTOParaGrafo(data);
     	grafoService.insert(grafo);
     	
-    	GrafoDTO grafoDTO = GrafoUtil.grafoParaDTO(grafo);
+    	GrafoDTO grafoDTO = GrafoUtil.grafoParaGrafoDTO(grafo);
     	
     	return ResponseEntity.status(HttpStatus.CREATED).body(grafoDTO);
     }
@@ -46,7 +45,7 @@ public class GrafoController {
     		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     	}
     	
-    	GrafoDTO grafoDTO = GrafoUtil.grafoParaDTO(grafo);
+    	GrafoDTO grafoDTO = GrafoUtil.grafoParaGrafoDTO(grafo);
     	
     	return ResponseEntity.status(HttpStatus.OK).body(grafoDTO);
 	}

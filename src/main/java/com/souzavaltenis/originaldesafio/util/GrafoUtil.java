@@ -3,7 +3,6 @@ package com.souzavaltenis.originaldesafio.util;
 import java.util.List;
 
 import com.souzavaltenis.originaldesafio.dto.ArestaDTO;
-import com.souzavaltenis.originaldesafio.dto.DataDTO;
 import com.souzavaltenis.originaldesafio.dto.GrafoDTO;
 import com.souzavaltenis.originaldesafio.model.Grafo;
 
@@ -12,7 +11,7 @@ public class GrafoUtil {
 	/*
 	 * Conversão de uma DataDTO para um objeto Grafo.
 	 * */
-	public static Grafo dataDTOParaGrafo(DataDTO data) {
+	public static Grafo grafoDTOParaGrafo(GrafoDTO data) {
 		
     	List<ArestaDTO> arestas = data.getData();
     	Grafo grafo = new Grafo();
@@ -26,7 +25,7 @@ public class GrafoUtil {
 	/*
 	 * Conversão de um objeto Grafo para um GrafoDTO.
 	 * */
-	public static GrafoDTO grafoParaDTO(Grafo grafo) {
+	public static GrafoDTO grafoParaGrafoDTO(Grafo grafo) {
 		List<ArestaDTO> arestasDTO = ArestaUtil.criarArestasDTO(grafo);
     	GrafoDTO grafoDTO = new GrafoDTO(grafo.getId(), arestasDTO);
     	return grafoDTO;

@@ -72,13 +72,17 @@ public class CaminhoUtil {
         
         CaminhoUtil.buscaEmProfundidade(caminhos, visitados, destino);
         
-        return paradasMaximas == null ? caminhos : caminhosFiltradosPM(caminhos, paradasMaximas);
+        if(paradasMaximas != null) { //Caso existir limite de paradas, realiza a filtragem
+        	caminhos.removeIf(c -> c.size() > paradasMaximas + 1); //+1 pois conta com a origem de acordo com o exemplos dados
+        }
+        
+        return caminhos;
     }
 	
 	/*
-	 * Realiza uma busca em profundidade para encontrar todos os caminhos possíveis entre dois vértices
+	 * Realiza busca em profundidade para encontrar todos os caminhos possíveis entre dois vértices
 	 * */
-    public static void buscaEmProfundidade(List<LinkedList<Vertice>> caminhos, LinkedList<Vertice> visitados, Vertice destino) {
+	public static void buscaEmProfundidade(List<LinkedList<Vertice>> caminhos, LinkedList<Vertice> visitados, Vertice destino) {
         
     	LinkedList<Vertice> nodes = proximosVertices(visitados.getLast().getArestasSaida());
 
@@ -88,7 +92,7 @@ public class CaminhoUtil {
             }
             if (node.equals(destino)) {//Caminho encontrado
             	visitados.add(node);
-                caminhos.add(clonarLL(visitados)); //Salva um clone da lista que possui o caminho atual
+                caminhos.add(new LinkedList<Vertice>(visitados)); //Salva um clone da lista que possui o caminho atual
                 visitados.removeLast(); //Retrocede
                 break;
             }
@@ -117,44 +121,5 @@ public class CaminhoUtil {
 		
 		return vertices;
 	}
-	
-    /*
-     * Passado um LinkedList, é realizado o clone das informações em outro LinkedList.
-     * */
-    private static LinkedList<Vertice> clonarLL(LinkedList<Vertice> visited) {
-    	
-		LinkedList<Vertice> caminho = new LinkedList<>();
-		
-		for(Vertice v : visited) {
-        	caminho.add(v);
-        }
-		
-		return caminho;
-	}
-    
-    /*
-     * A partir de uma lista de caminhos, realiza uma filtragem por paradas máximas baseado em um valor definido
-     * */
-    public static List<LinkedList<Vertice>> caminhosFiltradosPM(List<LinkedList<Vertice>> caminhos, Integer paradasMaximas){
-
-    	List<LinkedList<Vertice>> caminhosFiltrados = new ArrayList<>();
-    	for(LinkedList<Vertice> c : caminhos) {
-    		if(c.size() <= paradasMaximas + 1) { //+1 pois não conta a origem de acordo com o exemplos dados
-    			caminhosFiltrados.add(c);
-        	}
-    	}
-    	
-    	return caminhosFiltrados;
-    }
-
-    /*
-     * Remove elementos específicos de uma lista baseado em uma lista de indexs.
-     * */
-    public static void excluirCaminhos(List<LinkedList<Vertice>> caminhos, List<Integer> indexsToRemove) {
-    	indexsToRemove.forEach(System.out::println);
-    	for(Integer i : indexsToRemove) {
-    		caminhos.remove(i.intValue());
-    	}
-    }
 
 }

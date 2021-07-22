@@ -69,10 +69,5 @@ public class Aresta {
 	public void setDistancia(Integer distancia) {
 		this.distancia = distancia;
 	}
-
-	@Override
-	public String toString() {
-		return "Aresta [id=" + id + ", inicio=" + inicio.getDado() + ", fim=" + fim.getDado() + ", distancia=" + distancia + "]";
-	}
 	
 }

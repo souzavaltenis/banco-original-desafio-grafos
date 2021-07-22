@@ -33,7 +33,6 @@ public class Vertice {
 	}
 
 	public Vertice(String dado) {
-		super();
 		this.dado = dado;
 	}
 
