@@ -1,5 +1,7 @@
 package com.souzavaltenis.originaldesafio.dto;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -42,6 +44,24 @@ public class ArestaDTO {
 
 	public void setDistance(Integer distance) {
 		this.distance = distance;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(distance, source, target);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ArestaDTO other = (ArestaDTO) obj;
+		return Objects.equals(distance, other.distance) && Objects.equals(source, other.source)
+				&& Objects.equals(target, other.target);
 	}
 
 }

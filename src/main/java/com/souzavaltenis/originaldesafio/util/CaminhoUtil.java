@@ -17,8 +17,16 @@ public class CaminhoUtil {
 	 * por paradas máximas.
 	 * */
 	public static RoutesDTO criarRoutesDTO(Grafo grafo, String o, String d, Integer paradasMaximas) {
+		
+		if(o.equals(d)) { //Se origem e destino forem iguais, retorna apenas ele mesmo com distância 0
+			List<CaminhoDTO> routes = new ArrayList<>();
+			routes.add(new CaminhoDTO(o, 0));
+			return new RoutesDTO(routes);
+		}
+		
 		List<LinkedList<Vertice>> caminhos = CaminhoUtil.obterCaminhos(grafo, o, d, paradasMaximas);
 		RoutesDTO routesDTO = CaminhoUtil.caminhosParaDTO(caminhos);
+		
 		return routesDTO;
 	}
 	

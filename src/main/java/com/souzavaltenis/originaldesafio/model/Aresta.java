@@ -1,5 +1,7 @@
 package com.souzavaltenis.originaldesafio.model;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -68,6 +70,24 @@ public class Aresta {
 
 	public void setDistancia(Integer distancia) {
 		this.distancia = distancia;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(distancia, fim, id, inicio);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Aresta other = (Aresta) obj;
+		return Objects.equals(distancia, other.distancia) && Objects.equals(fim, other.fim)
+				&& Objects.equals(id, other.id) && Objects.equals(inicio, other.inicio);
 	}
 	
 }

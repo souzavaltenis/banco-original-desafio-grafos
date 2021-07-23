@@ -1,6 +1,7 @@
 package com.souzavaltenis.originaldesafio.dto;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -14,6 +15,11 @@ public class DistanciaDTO {
 
 	public DistanciaDTO() {
 
+	}
+	
+	public DistanciaDTO(List<String> path, Integer distance) {
+		this.path = path;
+		this.distance = distance;
 	}
 
 	public DistanciaDTO(List<String> path, List<ArestaDTO> data, Integer distance) {
@@ -44,6 +50,24 @@ public class DistanciaDTO {
 
 	public void setDistance(Integer distance) {
 		this.distance = distance;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(data, distance, path);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DistanciaDTO other = (DistanciaDTO) obj;
+		return Objects.equals(data, other.data) && Objects.equals(distance, other.distance)
+				&& Objects.equals(path, other.path);
 	}
 
 }
