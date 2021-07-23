@@ -15,7 +15,6 @@ import com.souzavaltenis.originaldesafio.dto.DistanciaDTO;
 import com.souzavaltenis.originaldesafio.dto.GrafoDTO;
 import com.souzavaltenis.originaldesafio.model.Grafo;
 import com.souzavaltenis.originaldesafio.service.GrafoService;
-import com.souzavaltenis.originaldesafio.service.exception.ResourceNotFoundException;
 import com.souzavaltenis.originaldesafio.util.DistanciaUtil;
 import com.souzavaltenis.originaldesafio.util.GrafoUtil;
 
@@ -27,40 +26,25 @@ public class DistanciaController {
 	private GrafoService grafoService;
 
     @PostMapping
-    public ResponseEntity<DistanciaDTO> calcularDistancia(@RequestBody DistanciaDTO distanciaDTO){
+    public ResponseEntity<DistanciaDTO> obterDistancia(@RequestBody DistanciaDTO distanciaDTO){
 
     	Grafo grafo = DistanciaUtil.distanciaDTOParaGrafo(distanciaDTO);
-    	List<String> path = distanciaDTO.getPath();
+    	List<String> caminho = distanciaDTO.getPath();
     	
-    	Integer distancia = DistanciaUtil.calcularDistancia(grafo, path);
+    	DistanciaDTO distanciaCalculada = DistanciaUtil.calcularDistanciaDeUmCaminho(grafo, caminho);
     	
-    	distanciaDTO.setData(null);
-    	distanciaDTO.setPath(null);
-    	distanciaDTO.setDistance(distancia);
-    	
-    	return ResponseEntity.status(HttpStatus.OK).body(distanciaDTO);
+    	return ResponseEntity.status(HttpStatus.OK).body(distanciaCalculada);
 	}
     
     @PostMapping(value = "/{graphId}")
-    public ResponseEntity<DistanciaDTO> calcularDistancia(@PathVariable Integer graphId, @RequestBody DistanciaDTO distanciaDTO){
+    public ResponseEntity<DistanciaDTO> obterDistancia(@PathVariable Integer graphId, @RequestBody DistanciaDTO distanciaDTO){
     	
-    	Grafo grafo = null;
+    	Grafo grafo = grafoService.buscarPorId(graphId);
+    	List<String> caminho = distanciaDTO.getPath();
     	
-    	try {
-    		grafo = grafoService.findById(graphId);
-    	}catch(ResourceNotFoundException e) {
-    		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    	}
-
-    	List<String> path = distanciaDTO.getPath();
+    	DistanciaDTO distanciaCalculada = DistanciaUtil.calcularDistanciaDeUmCaminho(grafo, caminho);
     	
-    	Integer distancia = DistanciaUtil.calcularDistancia(grafo, path);
-    	
-    	distanciaDTO.setData(null);
-    	distanciaDTO.setPath(null);
-    	distanciaDTO.setDistance(distancia);
-    	
-    	return ResponseEntity.status(HttpStatus.OK).body(distanciaDTO);
+    	return ResponseEntity.status(HttpStatus.OK).body(distanciaCalculada);
 	}
     
     @PostMapping(value = "/from/{town1}/to/{town2}")
@@ -68,24 +52,18 @@ public class DistanciaController {
     	
     	Grafo grafo = GrafoUtil.grafoDTOParaGrafo(grafoDTO);
     	
-    	DistanciaDTO distanciaDTO = DistanciaUtil.menorCaminho(grafo, town1, town2);
+    	DistanciaDTO distanciaMinimaCalculada = DistanciaUtil.menorCaminho(grafo, town1, town2);
     	
-    	return ResponseEntity.status(HttpStatus.OK).body(distanciaDTO);
+    	return ResponseEntity.status(HttpStatus.OK).body(distanciaMinimaCalculada);
 	}
     
     @PostMapping(value = "/{graphId}/from/{town1}/to/{town2}")
     public ResponseEntity<DistanciaDTO> calcularDistanciaMinima(@PathVariable Integer graphId, @PathVariable String town1, @PathVariable String town2){
     	
-    	Grafo grafo = null;
+    	Grafo grafo = grafoService.buscarPorId(graphId);
     	
-    	try {
-    		grafo = grafoService.findById(graphId);
-    	}catch(ResourceNotFoundException e) {
-    		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    	}
+    	DistanciaDTO distanciaMinimaCalculada = DistanciaUtil.menorCaminho(grafo, town1, town2);
     	
-    	DistanciaDTO distanciaDTO = DistanciaUtil.menorCaminho(grafo, town1, town2);
-    	
-    	return ResponseEntity.status(HttpStatus.OK).body(distanciaDTO);
+    	return ResponseEntity.status(HttpStatus.OK).body(distanciaMinimaCalculada);
 	}
 }

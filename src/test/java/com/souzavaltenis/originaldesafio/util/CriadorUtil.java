@@ -8,7 +8,10 @@ import com.souzavaltenis.originaldesafio.model.Grafo;
 
 public class CriadorUtil {
 
-	//AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7
+	/*
+	 * Criação do grafo para realizar os casos de teste
+	 * Grafo: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7
+	 * */
 	public static Grafo criarGrafo() {
 
     	List<ArestaDTO> arestas = new ArrayList<>();

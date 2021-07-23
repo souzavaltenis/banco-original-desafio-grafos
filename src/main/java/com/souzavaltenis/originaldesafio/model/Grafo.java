@@ -19,11 +19,11 @@ public class Grafo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@OneToMany(cascade=CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(nullable = true)
 	private List<Vertice> vertices;
 
-	@OneToMany(cascade=CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(nullable = true)
 	private List<Aresta> arestas;
 

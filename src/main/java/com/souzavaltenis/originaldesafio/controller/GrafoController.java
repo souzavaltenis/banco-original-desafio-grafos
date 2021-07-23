@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.souzavaltenis.originaldesafio.service.GrafoService;
-import com.souzavaltenis.originaldesafio.service.exception.ResourceNotFoundException;
 import com.souzavaltenis.originaldesafio.util.GrafoUtil;
 import com.souzavaltenis.originaldesafio.dto.GrafoDTO;
 import com.souzavaltenis.originaldesafio.model.Grafo;
@@ -27,27 +26,21 @@ public class GrafoController {
     public ResponseEntity<GrafoDTO> inserir(@RequestBody GrafoDTO data) {
     	
     	Grafo grafo = GrafoUtil.grafoDTOParaGrafo(data);
-    	grafoService.insert(grafo);
+    	grafoService.inserir(grafo);
     	
-    	GrafoDTO grafoDTO = GrafoUtil.grafoParaGrafoDTO(grafo);
+    	GrafoDTO grafoCriado = GrafoUtil.grafoParaGrafoDTO(grafo);
     	
-    	return ResponseEntity.status(HttpStatus.CREATED).body(grafoDTO);
+    	return ResponseEntity.status(HttpStatus.CREATED).body(grafoCriado);
     }
     
     @GetMapping(value = "/{graphId}")
     public ResponseEntity<GrafoDTO> buscar(@PathVariable Integer graphId){
     	
-    	Grafo grafo = null;
+    	Grafo grafo = grafoService.buscarPorId(graphId);
+
+    	GrafoDTO grafoEncontrado = GrafoUtil.grafoParaGrafoDTO(grafo);
     	
-    	try {
-    		grafo = grafoService.findById(graphId);
-    	}catch(ResourceNotFoundException e) {
-    		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    	}
-    	
-    	GrafoDTO grafoDTO = GrafoUtil.grafoParaGrafoDTO(grafo);
-    	
-    	return ResponseEntity.status(HttpStatus.OK).body(grafoDTO);
+    	return ResponseEntity.status(HttpStatus.OK).body(grafoEncontrado);
 	}
     
 }

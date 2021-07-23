@@ -26,8 +26,11 @@ public class GrafoUtil {
 	 * Conversão de um objeto Grafo para um GrafoDTO.
 	 * */
 	public static GrafoDTO grafoParaGrafoDTO(Grafo grafo) {
+		
 		List<ArestaDTO> arestasDTO = ArestaUtil.criarArestasDTO(grafo);
+		
     	GrafoDTO grafoDTO = new GrafoDTO(grafo.getId(), arestasDTO);
+    	
     	return grafoDTO;
 	}
 }

@@ -68,11 +68,15 @@ public class ArestaUtil {
      * Prepara e Adiciona uma aresta em um grafo.
      * */
 	public static void adicionarAresta(Grafo grafo, String dadoInicio, String dadoFim, Integer distancia) {
+		
 		Vertice inicio = VerticeUtil.findVertice(grafo.getVertices(), dadoInicio);
 		Vertice fim = VerticeUtil.findVertice(grafo.getVertices(), dadoFim);
+		
 		Aresta aresta = new Aresta(inicio, fim, distancia);
+		
 		inicio.getArestasSaida().add(aresta);
 		fim.getArestasEntrada().add(aresta);
+		
 		grafo.getArestas().add(aresta);
 	}
 }

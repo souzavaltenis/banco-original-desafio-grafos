@@ -12,6 +12,18 @@ import com.souzavaltenis.originaldesafio.model.Grafo;
 import com.souzavaltenis.originaldesafio.model.Vertice;
 
 public class DistanciaUtil {
+	
+	/*
+	 * Pega um caminho e um grafo, verifica a distancia gasta parar percorrer-lo.
+	 * */
+	public static DistanciaDTO calcularDistanciaDeUmCaminho(Grafo grafo, List<String> caminho) {
+
+    	Integer distancia = DistanciaUtil.calcularDistancia(grafo, caminho);
+    	
+    	DistanciaDTO distanciaCalculada = new DistanciaDTO(distancia);
+
+		return distanciaCalculada;
+	}
 
 	/*
 	 * A partir de um objeto DistanciaDTO, é extraido a lista de arestas para criar um Grafo.

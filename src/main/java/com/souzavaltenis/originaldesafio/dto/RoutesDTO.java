@@ -16,7 +16,6 @@ public class RoutesDTO {
 	}
 
 	public RoutesDTO(List<CaminhoDTO> routes) {
-		super();
 		this.routes = routes;
 	}
 

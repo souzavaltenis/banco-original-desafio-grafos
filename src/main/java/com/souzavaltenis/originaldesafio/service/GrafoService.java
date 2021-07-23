@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.souzavaltenis.originaldesafio.model.Grafo;
 import com.souzavaltenis.originaldesafio.repository.GrafoRepository;
-import com.souzavaltenis.originaldesafio.service.exception.ResourceNotFoundException;
+import com.souzavaltenis.originaldesafio.service.exception.GrafoNaoEncontradoException;
 
 @Service
 public class GrafoService {
@@ -15,12 +15,12 @@ public class GrafoService {
     @Autowired
     private GrafoRepository repository;
     
-    public Grafo findById(Integer id) {
+    public Grafo buscarPorId(Integer id) {
     	Optional<Grafo> grafo = repository.findById(id);
-    	return grafo.orElseThrow(() -> new ResourceNotFoundException(id));
+    	return grafo.orElseThrow(() -> new GrafoNaoEncontradoException(id));
     }
     
-    public Grafo insert(Grafo grafo) {
+    public Grafo inserir(Grafo grafo) {
     	return repository.save(grafo);
     }
  

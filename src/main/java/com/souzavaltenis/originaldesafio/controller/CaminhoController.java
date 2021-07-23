@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.souzavaltenis.originaldesafio.service.GrafoService;
-import com.souzavaltenis.originaldesafio.service.exception.ResourceNotFoundException;
 import com.souzavaltenis.originaldesafio.dto.GrafoDTO;
 import com.souzavaltenis.originaldesafio.dto.RoutesDTO;
 import com.souzavaltenis.originaldesafio.model.Grafo;
@@ -27,30 +26,24 @@ public class CaminhoController {
     
     @PostMapping(value = "/from/{town1}/to/{town2}")
     public ResponseEntity<RoutesDTO> encontrarCaminhos(@RequestBody GrafoDTO grafoDTO, @PathVariable String town1, @PathVariable String town2, 
-    		@RequestParam(value = "maxStops", required=false) Integer maxStops){
+    		@RequestParam(value = "maxStops", required = false) Integer maxStops){
 
     	Grafo grafo = GrafoUtil.grafoDTOParaGrafo(grafoDTO);
     	
-    	RoutesDTO routesDTO = CaminhoUtil.criarRoutesDTO(grafo, town1, town2, maxStops);
+    	RoutesDTO caminhosEncontrados = CaminhoUtil.criarRoutesDTO(grafo, town1, town2, maxStops);
     	
-    	return ResponseEntity.status(HttpStatus.OK).body(routesDTO);
+    	return ResponseEntity.status(HttpStatus.OK).body(caminhosEncontrados);
 	}
     
     @PostMapping(value = "/{graphId}/from/{town1}/to/{town2}")
     public ResponseEntity<RoutesDTO> encontrarCaminhos(@PathVariable Integer graphId, @PathVariable String town1, @PathVariable String town2, 
-    		@RequestParam(value = "maxStops", required=false) Integer maxStops){
+    		@RequestParam(value = "maxStops", required = false) Integer maxStops){
 
-    	Grafo grafo = null;
-    	
-    	try {
-    		grafo = grafoService.findById(graphId);
-    	}catch(ResourceNotFoundException e) {
-    		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    	}
+    	Grafo grafo = grafoService.buscarPorId(graphId);
 
-    	RoutesDTO routesDTO = CaminhoUtil.criarRoutesDTO(grafo, town1, town2, maxStops);
+    	RoutesDTO caminhosEncontrados = CaminhoUtil.criarRoutesDTO(grafo, town1, town2, maxStops);
     	
-    	return ResponseEntity.status(HttpStatus.OK).body(routesDTO);
+    	return ResponseEntity.status(HttpStatus.OK).body(caminhosEncontrados);
 	}
 }
 

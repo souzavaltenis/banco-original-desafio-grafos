@@ -17,6 +17,10 @@ public class DistanciaDTO {
 
 	}
 	
+	public DistanciaDTO(Integer distance) {
+		this.distance = distance;
+	}
+	
 	public DistanciaDTO(List<String> path, Integer distance) {
 		this.path = path;
 		this.distance = distance;

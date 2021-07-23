@@ -53,9 +53,4 @@ public class CaminhoDTO {
 		return Objects.equals(route, other.route) && Objects.equals(stops, other.stops);
 	}
 
-	@Override
-	public String toString() {
-		return "CaminhoDTO [route=" + route + ", stops=" + stops + "]";
-	}
-
 }
