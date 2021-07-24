@@ -1,6 +1,6 @@
 # API RESTful de Grafos
 
-<h3>Esta API possui como objetivo realizar algumas tarefas utilizando grafos. Ela foi desenvolvida para o processo seletivo na vaga de Analista Jr do <a href="https://www.original.com.br/">Banco Original</a>.</h3>
+#### Esta API possui como objetivo realizar algumas tarefas utilizando grafos. Ela foi desenvolvida para o processo seletivo na vaga de Analista Jr do [Banco Original](https://www.original.com.br/).
 
 [![Author](https://img.shields.io/badge/author-souzavaltenis-AD1256?style=flat-square)](https://github.com/souzavaltenis)
 [![Languages](https://img.shields.io/github/languages/count/souzavaltenis/banco-original-desafio-grafos?color=%23AD1256&style=flat-square)](#)
@@ -39,84 +39,21 @@ $ mvn spring-boot:run
 
 ## 📍 Endpoints
 
+#### Todos endpoints disponíveis nesta API estão listados na tabela abaixo. 
+#### Se desejar saber mais detalhes para utilização de cada endpoint, [clique aqui](/DETAILS.md). 
+<br>
+
 |            | Endpoint | Descrição |
 |------------|----------|-----------|
 | [**POST**] | /graph   | Recebe um grafo e salva no banco de dados. |
-| [**GET**]  | /graph/&lt;graphId&gt; | Busca um grafo por id. |
-| [**POST**] | /routes/from/&lt;town1&gt;/to/&lt;town2&gt;?maxStops=&lt;maxStops&gt; | Encontrar todos caminhos entre dois vértices, podendo definir as paradas máximas. |
-| [**POST**] | /routes/&lt;graphId&gt;/from/&lt;town1&gt;/to/&lt;town2&gt;?maxStops=&lt;maxStops&gt; | Mesma funcionalidade do anterior, porém será calculado baseado em um grafo salvo. |
+| [**GET**]  | /graph/\<graphId\> | Busca um grafo por id. |
+| [**POST**] | /routes/from/\<town1\>/to/\<town2\>?maxStops=\<maxStops\> | Encontrar todos caminhos entre dois vértices, podendo definir as paradas máximas. |
+| [**POST**] | /routes/\<graphId\>/from/\<town1\>/to/\<town2\>?maxStops=\<maxStops\> | Mesma funcionalidade do anterior, porém será calculado baseado em um grafo salvo. |
 | [**POST**] | /distance | Retorna a distância total de um caminho pré-definido entre dois vértices. |
-| [**POST**] | /distance/&lt;graphId&gt; | Mesma funcionalidade do anterior, porém será calculado baseado em um grafo salvo. |
-| [**POST**] | /distance/from/&lt;town1&gt;/to/&lt;town2&gt; | Calcula o caminho com menor distância entre dois vértices. |
-| [**POST**] | /distance/&lt;graphId&gt;/from/&lt;town1&gt;/to/&lt;town2&gt; | Mesma funcionalidade do anterior, porém será calculado baseado em um grafo salvo. |
-
-## ✏ Exemplo de Requisição
-
-<h4> O exemplo abaixo realiza uma requisição GET para realizar uma busca por um grafo que possua o Id 1.</h4>
-
-|| Endpoint |
-|-------------|----------|
-| [**GET**] | http://localhost:8080/graph/1|
-
-- **Resposta:**
-```yaml
-{
-  "id": 1,
-  "data": [
-    {
-      "source": "A",
-      "target": "B",
-      "distance": 6
-    },
-    {
-      "source": "A",
-      "target": "E",
-      "distance": 4
-    },
-    {
-      "source": "B",
-      "target": "A",
-      "distance": 6
-    },
-    {
-      "source": "B",
-      "target": "C",
-      "distance": 2
-    },
-    {
-      "source": "B",
-      "target": "D",
-      "distance": 4
-    },
-    {
-      "source": "C",
-      "target": "B",
-      "distance": 3
-    },
-    {
-      "source": "C",
-      "target": "D",
-      "distance": 1
-    },
-    {
-      "source": "C",
-      "target": "E",
-      "distance": 7
-    },
-    {
-      "source": "E",
-      "target": "B",
-      "distance": 5
-    },
-    {
-      "source": "E",
-      "target": "D",
-      "distance": 7
-    }
-  ]
-}
-```
+| [**POST**] | /distance/\<graphId\> | Mesma funcionalidade do anterior, porém será calculado baseado em um grafo salvo. |
+| [**POST**] | /distance/from/\<town1\>/to/\<town2\> | Calcula o caminho com menor distância entre dois vértices. |
+| [**POST**] | /distance/\<graphId\>/from/\<town1\>/to/\<town2\> | Mesma funcionalidade do anterior, porém será calculado baseado em um grafo salvo. |
 
 ---
 
-### Codificado com :heart: por [Valtenis Souza](https://github.com/souzavaltenis) 🚀
+#### Codificado com :heart: por [Valtenis Souza](https://github.com/souzavaltenis) 🚀
